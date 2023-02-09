@@ -3,6 +3,10 @@ import mongoose, { mongo } from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 
+// Routes
+import userRoutes from "./routes/user.js";
+
+// App initialising
 const app = express();
 
 const PORT = 5050;
@@ -21,7 +25,9 @@ mongoose.connect(MONGOURL).then(() => {
         console.log(`Server running on http://localhost:${PORT}`);
     });
 }).catch((err) => console.log(err, "\n err in connection"));
-app.get('/', (req,res) => {
-    res.send("Hello Listening to the server....");
-});
+
+app.use("/user", userRoutes);
+// app.get('/', (req,res) => {
+//     res.send("Hello Listening to the server....");
+// });
 
